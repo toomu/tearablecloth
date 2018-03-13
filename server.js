@@ -3,7 +3,7 @@ var server = new StaticServer({
   rootPath: '.',            // required, the root of the server file tree
   name: 'my-http-server',   // optional, will set "X-Powered-by" HTTP header
   port: 1337,               // optional, defaults to a random port
-  host: '192.168.0.100',       // optional, defaults to any interface
+  host: '192.168.0.101',       // optional, defaults to any interface
   cors: '*',                // optional, defaults to undefined
   followSymlink: true,      // optional, defaults to a 404 error
   templates: {
@@ -42,3 +42,4 @@ server.on('response', function (req, res, err, file, stat) {
 
   // NOTE: the response has already been sent at this point
 });
+

@@ -1,0 +1,118 @@
+<script src="https://hammerjs.github.io/dist/hammer.js"></script>
+
+<style>
+
+
+    #myElement {
+        background: silver;
+        height: 300px;
+        text-align: center;
+        font: 30px/300px Helvetica, Arial, sans-serif;
+    }
+
+
+
+</style>
+<video loop autoplay  width='100%' height='100%' src='/stylesheets/video.mp4' type='video/mp4' id="myvid"></video>
+
+<script>
+
+
+
+
+
+  var touchx = 0
+
+  var touchy =0
+
+//  document.addEventListener('touchmove', function(e) {
+//    e.preventDefault();
+//    var touch = e.touches[0];
+//
+//
+//    var diffx = e.touches[0].clientX - touchx;
+//    var diffy = e.touches[0].clientY - touchy;
+//
+//
+//    touchx=e.touches[0].clientX
+//    touchy = e.touches[0].clientY
+//
+//    ffTo24(diffx)
+//
+//
+//
+//    console.log("touch", touchx, touchy, diffx, diffy)
+//  }, false);
+
+  var vid = document.getElementById('myvid');
+  vid.pause();
+
+  function ffTo24 (delta ){
+
+
+    if(delta<50){
+      var ticks = 50, // number of frames during fast-forward
+        frms = 10 // number of milliseconds between frames in fast-forward/rewind
+      //endtime = 24.0; // time to fast-forward/remind to (in seconds)
+      // fast-forward/rewind video to end time
+//    var tdelta = delta/ticks;
+      var startTime = vid.currentTime;
+
+
+
+      vid.currentTime = delta/20 ;
+
+
+//    vid.currentTime = vid.currentTime +0.1 ;
+
+//      console.log(vid.currentTime, startTime, delta, vid.duration)
+
+
+//    for ( var i = 0; i < ticks; ++i )
+//    {
+//      (function(j){
+//        setTimeout(function() {
+//          vid.currentTime = startTime+tdelta * j;
+//          console.log(vid.currentTime, startTime+tdelta * j)
+//
+//        }, j * frms);
+//      })(i);
+//    }
+
+    }
+
+
+  }
+
+
+var distance=0
+
+
+
+
+  var mc = new Hammer.Manager(myvid);
+
+  // create a pinch and rotate recognizer
+  // these require 2 pointers
+  var pinch = new Hammer.Pinch();
+  var rotate = new Hammer.Rotate();
+
+  // we want to detect both the same time
+  pinch.recognizeWith(rotate);
+
+  // add to the Manager
+  mc.add([pinch, rotate]);
+
+
+  mc.on("pinch", function(ev) {
+    console.log(ev.deltaX, ev.distance)
+
+
+
+    ffTo24(ev.distance)
+
+
+
+
+  });
+</script>
