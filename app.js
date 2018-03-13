@@ -15,7 +15,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var router = express.Router();
 
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.redirect("/t.html");
+});
+
+app.use(router)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
